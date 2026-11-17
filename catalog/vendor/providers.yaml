@@ -1,0 +1,83 @@
+# Illustrative v1 rules: exact match means FQDN equality (case-insensitive).
+# 'port_hint' is NEVER high-confidence proof of a vendor.
+# Keep this registry current. Strong evidence requires an observed flow.
+version: 1
+rules:
+  - id: openai-chatgpt-web
+    provider: OpenAI
+    service: ChatGPT
+    category: chat_web
+    match: {type: exact_hostname, value: chatgpt.com}
+    base_confidence: high
+  - id: openai-chatgpt-desktop
+    provider: OpenAI
+    service: ChatGPT Desktop
+    category: chat_web
+    match: {type: exact_hostname, value: desktop.chat.openai.com}
+    base_confidence: high
+  - id: openai-api
+    provider: OpenAI
+    service: OpenAI API
+    category: api
+    match: {type: exact_hostname, value: api.openai.com}
+    base_confidence: high
+  - id: claude-web
+    provider: Anthropic
+    service: Claude
+    category: chat_web
+    match: {type: exact_hostname, value: claude.ai}
+    base_confidence: high
+  - id: claude-api
+    provider: Anthropic
+    service: Claude API
+    category: api
+    match: {type: exact_hostname, value: api.anthropic.com}
+    base_confidence: high
+  - id: gemini-web
+    provider: Google
+    service: Gemini
+    category: chat_web
+    match: {type: exact_hostname, value: gemini.google.com}
+    base_confidence: high
+  - id: gemini-api
+    provider: Google
+    service: Gemini API
+    category: api
+    match: {type: exact_hostname, value: generativelanguage.googleapis.com}
+    base_confidence: high
+  - id: copilot-chat
+    provider: Microsoft
+    service: Copilot
+    category: chat_web
+    match: {type: exact_hostname, value: copilot.cloud.microsoft}
+    base_confidence: high
+  - id: openrouter-api
+    provider: OpenRouter
+    service: OpenRouter API
+    category: router
+    match: {type: exact_hostname, value: openrouter.ai}
+    base_confidence: high
+  - id: openrouter-us-api
+    provider: OpenRouter
+    service: OpenRouter US API
+    category: router
+    match: {type: exact_hostname, value: us.openrouter.ai}
+    base_confidence: high
+  - id: openrouter-eu-api
+    provider: OpenRouter
+    service: OpenRouter EU API
+    category: router
+    match: {type: exact_hostname, value: eu.openrouter.ai}
+    base_confidence: high
+  - id: ollama-port-hint
+    provider: Unknown
+    service: Possible Ollama-compatible endpoint
+    category: local_llm
+    match: {type: destination_port_hint, value: 11434, scope: private_network}
+    base_confidence: low
+  - id: lmstudio-port-hint
+    provider: Unknown
+    service: Possible LM Studio-compatible endpoint
+    category: local_llm
+    match: {type: destination_port_hint, value: 1234, scope: private_network}
+    base_confidence: low

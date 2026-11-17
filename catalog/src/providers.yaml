@@ -1,0 +1,149 @@
+# Upstream AI providers: how to recognise traffic to them, and where they are headquartered.
+#
+# hq_country is the provider's headquarters (ISO 3166-1 alpha-2). It is NOT the processing region:
+# many providers run regional endpoints and resell through clouds. Cited evidence for each row lives
+# in provider_sources.json (source page, quote, regional entities, stated processing countries);
+# build_catalog.py merges it, sets the row's status, and fails if a cited country disagrees.
+#
+# api_hosts match exactly or as a suffix (".example.com" matches "api.example.com").
+# regional_hosts are templates with a {region} placeholder; the matched code is looked up in
+# cloud_regions.json (cloud: aws | gcp) to give the country where the request is processed.
+# region_env lists env names whose VALUE is a region code (read only when it is a known code).
+# npm / pypi are SDK packages whose presence in an MCP server's dependency tree means its code can
+# call the provider. env_keys are credential names that hand the provider's key to a process.
+schema_version: 1
+providers:
+  - {id: openai,      name: OpenAI,        hq_country: US, status: unverified,
+     api_hosts: [api.openai.com, chatgpt.com, oaiusercontent.com],
+     npm: [openai, "@ai-sdk/openai", "@langchain/openai"], pypi: [openai, langchain-openai],
+     env_keys: [OPENAI_API_KEY], base_url_env: [OPENAI_BASE_URL, OPENAI_API_BASE]}
+  - {id: azure_openai, name: Azure OpenAI (Microsoft), hq_country: US, status: unverified,
+     api_hosts: [openai.azure.com, cognitiveservices.azure.com, services.ai.azure.com],
+     npm: ["@azure/openai", "@ai-sdk/azure"], pypi: [],
+     env_keys: [AZURE_OPENAI_API_KEY], base_url_env: [AZURE_OPENAI_ENDPOINT]}
+  - {id: anthropic,   name: Anthropic,     hq_country: US, status: unverified,
+     api_hosts: [api.anthropic.com, claude.ai],
+     npm: ["@anthropic-ai/sdk", "@ai-sdk/anthropic", "@langchain/anthropic", "@anthropic-ai/claude-agent-sdk"], pypi: [anthropic, langchain-anthropic, claude-agent-sdk],
+     env_keys: [ANTHROPIC_API_KEY, CLAUDE_CODE_OAUTH_TOKEN], base_url_env: [ANTHROPIC_BASE_URL]}
+  - {id: aws_bedrock, name: Amazon Bedrock (AWS), hq_country: US, status: unverified,
+     api_hosts: [bedrock-runtime.amazonaws.com, bedrock.amazonaws.com],
+     npm: ["@aws-sdk/client-bedrock-runtime", "@ai-sdk/amazon-bedrock"], pypi: [langchain-aws],
+     env_keys: [AWS_BEARER_TOKEN_BEDROCK], base_url_env: [ANTHROPIC_BEDROCK_BASE_URL],
+     cloud: aws, regional_hosts: ["bedrock-runtime.{region}.amazonaws.com", "bedrock-runtime-fips.{region}.amazonaws.com", "bedrock.{region}.amazonaws.com", "bedrock-agent-runtime.{region}.amazonaws.com"],
+     region_env: [AWS_REGION, AWS_DEFAULT_REGION]}
+  - {id: google,      name: Google Gemini / Vertex AI, hq_country: US, status: unverified,
+     api_hosts: [generativelanguage.googleapis.com, aiplatform.googleapis.com, gemini.google.com, notebooklm.google.com, aistudio.google.com],
+     npm: ["@google/generative-ai", "@google/genai", "@ai-sdk/google", "@ai-sdk/google-vertex", "@google-cloud/vertexai"], pypi: [google-generativeai, google-genai, google-cloud-aiplatform, langchain-google-genai],
+     env_keys: [GEMINI_API_KEY, GOOGLE_GENERATIVE_AI_API_KEY], base_url_env: [ANTHROPIC_VERTEX_BASE_URL],
+     cloud: gcp, regional_hosts: ["{region}-aiplatform.googleapis.com", "aiplatform.{region}.rep.googleapis.com"],
+     region_env: [CLOUD_ML_REGION, GOOGLE_CLOUD_LOCATION, GOOGLE_CLOUD_REGION, VERTEX_LOCATION]}
+  - {id: mistral,     name: Mistral AI,    hq_country: FR, status: unverified,
+     api_hosts: [api.mistral.ai, chat.mistral.ai],
+     npm: ["@mistralai/mistralai", "@ai-sdk/mistral"], pypi: [mistralai],
+     env_keys: [MISTRAL_API_KEY], base_url_env: []}
+  - {id: cohere,      name: Cohere,        hq_country: CA, status: unverified,
+     api_hosts: [api.cohere.com, api.cohere.ai],
+     npm: [cohere-ai, "@ai-sdk/cohere"], pypi: [cohere],
+     env_keys: [COHERE_API_KEY], base_url_env: []}
+  - {id: deepseek,    name: DeepSeek,      hq_country: CN, status: unverified,
+     api_hosts: [api.deepseek.com, chat.deepseek.com],
+     npm: ["@ai-sdk/deepseek"], pypi: [],
+     env_keys: [DEEPSEEK_API_KEY], base_url_env: []}
+  - {id: moonshot,    name: Moonshot AI (Kimi), hq_country: CN, status: unverified,
+     api_hosts: [api.moonshot.cn, api.moonshot.ai, kimi.com],
+     npm: [], pypi: [], env_keys: [MOONSHOT_API_KEY], base_url_env: []}
+  - {id: zhipu,       name: Zhipu AI (GLM), hq_country: CN, status: unverified,
+     api_hosts: [open.bigmodel.cn, api.z.ai],
+     npm: [], pypi: [zhipuai], env_keys: [ZHIPUAI_API_KEY], base_url_env: []}
+  - {id: alibaba,     name: Alibaba Cloud Model Studio (Qwen), hq_country: CN, status: unverified,
+     api_hosts: [dashscope.aliyuncs.com, dashscope-intl.aliyuncs.com],
+     npm: [], pypi: [dashscope], env_keys: [DASHSCOPE_API_KEY], base_url_env: []}
+  - {id: xai,         name: xAI,           hq_country: US, status: unverified,
+     api_hosts: [api.x.ai, grok.com],
+     npm: ["@ai-sdk/xai"], pypi: [xai-sdk], env_keys: [XAI_API_KEY], base_url_env: []}
+  - {id: groq,        name: Groq,          hq_country: US, status: unverified,
+     api_hosts: [api.groq.com],
+     npm: [groq-sdk, "@ai-sdk/groq"], pypi: [groq], env_keys: [GROQ_API_KEY], base_url_env: []}
+  - {id: perplexity,  name: Perplexity,    hq_country: US, status: unverified,
+     api_hosts: [api.perplexity.ai, perplexity.ai],
+     npm: ["@ai-sdk/perplexity"], pypi: [], env_keys: [PERPLEXITY_API_KEY], base_url_env: []}
+  - {id: together,    name: Together AI,   hq_country: US, status: unverified,
+     api_hosts: [api.together.xyz, api.together.ai],
+     npm: [together-ai, "@ai-sdk/togetherai"], pypi: [together], env_keys: [TOGETHER_API_KEY], base_url_env: []}
+  - {id: fireworks,   name: Fireworks AI,  hq_country: US, status: unverified,
+     api_hosts: [api.fireworks.ai],
+     npm: ["@ai-sdk/fireworks"], pypi: [fireworks-ai], env_keys: [FIREWORKS_API_KEY], base_url_env: []}
+  - {id: openrouter,  name: OpenRouter,    hq_country: US, status: unverified,
+     api_hosts: [openrouter.ai],
+     npm: ["@openrouter/ai-sdk-provider"], pypi: [], env_keys: [OPENROUTER_API_KEY], base_url_env: []}
+  - {id: replicate,   name: Replicate,     hq_country: US, status: unverified,
+     api_hosts: [api.replicate.com],
+     npm: [replicate], pypi: [replicate], env_keys: [REPLICATE_API_TOKEN], base_url_env: []}
+  - {id: huggingface, name: Hugging Face,  hq_country: US, status: unverified,
+     api_hosts: [api-inference.huggingface.co, router.huggingface.co, huggingface.co],
+     npm: ["@huggingface/inference"], pypi: [huggingface-hub, huggingface_hub], env_keys: [HF_TOKEN, HUGGINGFACE_API_KEY], base_url_env: []}
+  - {id: elevenlabs,  name: ElevenLabs,    hq_country: US, status: unverified,
+     api_hosts: [api.elevenlabs.io, api.us.elevenlabs.io, elevenlabs.io],
+     npm: ["@elevenlabs/elevenlabs-js", elevenlabs, "@elevenlabs/client"], pypi: [elevenlabs, elevenlabs-mcp],
+     env_keys: [ELEVENLABS_API_KEY, XI_API_KEY], base_url_env: [ELEVENLABS_BASE_URL]}
+  - {id: suno,        name: Suno,          hq_country: US, status: unverified,
+     api_hosts: [suno.com, suno.ai],
+     npm: [], pypi: [], env_keys: [SUNO_API_KEY, SUNO_COOKIE], base_url_env: [SUNO_API_URL, SUNO_BASE_URL]}
+  - {id: stability,   name: Stability AI,  hq_country: GB, status: unverified,
+     api_hosts: [api.stability.ai],
+     npm: [], pypi: [stability-sdk], env_keys: [STABILITY_API_KEY], base_url_env: []}
+  - {id: bfl,         name: Black Forest Labs, hq_country: DE, status: unverified,
+     api_hosts: [api.bfl.ml, api.bfl.ai],
+     npm: [], pypi: [], env_keys: [BFL_API_KEY], base_url_env: []}
+  - {id: runway,      name: Runway,        hq_country: US, status: unverified,
+     api_hosts: [api.runwayml.com, api.dev.runwayml.com],
+     npm: ["@runwayml/sdk"], pypi: [runwayml], env_keys: [RUNWAYML_API_SECRET], base_url_env: []}
+  - {id: luma,        name: Luma AI,       hq_country: US, status: unverified,
+     api_hosts: [api.lumalabs.ai],
+     npm: [lumaai], pypi: [lumaai], env_keys: [LUMAAI_API_KEY], base_url_env: []}
+  - {id: fal,         name: fal,           hq_country: US, status: unverified,
+     api_hosts: [fal.run, fal.ai, queue.fal.run],
+     npm: ["@fal-ai/client", "@fal-ai/serverless-client"], pypi: [fal-client], env_keys: [FAL_KEY], base_url_env: []}
+  - {id: deepgram,    name: Deepgram,      hq_country: US, status: unverified,
+     api_hosts: [api.deepgram.com],
+     npm: ["@deepgram/sdk"], pypi: [deepgram-sdk], env_keys: [DEEPGRAM_API_KEY], base_url_env: []}
+  - {id: assemblyai,  name: AssemblyAI,    hq_country: US, status: unverified,
+     api_hosts: [api.assemblyai.com],
+     npm: [assemblyai], pypi: [assemblyai], env_keys: [ASSEMBLYAI_API_KEY], base_url_env: []}
+  - {id: cartesia,    name: Cartesia,      hq_country: US, status: unverified,
+     api_hosts: [api.cartesia.ai],
+     npm: ["@cartesia/cartesia-js"], pypi: [cartesia], env_keys: [CARTESIA_API_KEY], base_url_env: []}
+  - {id: voyage,      name: Voyage AI,     hq_country: US, status: unverified,
+     api_hosts: [api.voyageai.com],
+     npm: [voyageai], pypi: [voyageai], env_keys: [VOYAGE_API_KEY], base_url_env: []}
+  - {id: github_copilot, name: GitHub Copilot (Microsoft), hq_country: US, status: unverified,
+     api_hosts: [api.githubcopilot.com, copilot-proxy.githubusercontent.com],
+     npm: [], pypi: [], env_keys: [], base_url_env: []}
+  - {id: microsoft_copilot, name: Microsoft Copilot, hq_country: US, status: unverified,
+     api_hosts: [copilot.microsoft.com],
+     npm: [], pypi: [], env_keys: [], base_url_env: []}
+  - {id: poe,         name: Poe (Quora),   hq_country: US, status: unverified,
+     api_hosts: [poe.com, api.poe.com],
+     npm: [], pypi: [fastapi-poe], env_keys: [POE_API_KEY], base_url_env: []}
+  - {id: character_ai, name: Character.AI, hq_country: US, status: unverified,
+     api_hosts: [character.ai],
+     npm: [], pypi: [], env_keys: [], base_url_env: []}
+  - {id: ollama_local, name: Ollama (local), hq_country: LOCAL, status: unverified,
+     api_hosts: [],
+     npm: [ollama, ollama-ai-provider], pypi: [ollama], env_keys: [], base_url_env: [OLLAMA_HOST]}
+
+# Coding agents and the provider each one uses unless its settings say otherwise.
+agent_defaults:
+  - {agent: claude_code, command: claude,  provider: anthropic}
+  - {agent: codex_cli,   command: codex,   provider: openai}
+  - {agent: gemini_cli,  command: gemini,  provider: google}
+  - {agent: copilot_cli, command: copilot, provider: github_copilot}
+  - {agent: cursor_agent, command: cursor-agent, provider: unknown}
+
+# Settings flags that reroute Claude Code (value read only as true/false).
+claude_code_routes:
+  - {env: CLAUDE_CODE_USE_BEDROCK, provider: aws_bedrock}
+  - {env: CLAUDE_CODE_USE_VERTEX,  provider: google}
+
+# Env names whose VALUE is an endpoint URL; only its host is kept.
+endpoint_env_pattern: "(BASE_URL|API_BASE|API_URL|ENDPOINT|_HOST)$"

@@ -1,0 +1,164 @@
+# URL usage fingerprints for known AI web services.
+#
+# A visit to an AI domain proves only that the site was reached. These rules grade
+# what the browser history, cookie store and downloads table can show locally:
+#
+#   reached    DNS cache entry or a history visit to the domain with no usage path
+#   signed_in  a session cookie NAME for the service exists (cookie values are never read)
+#   used       a history URL matches a conversation/notebook path template
+#   data_out   a browser download came from the service's file host
+#
+# Path templates: literal segments are fixed; {id} is any opaque identifier; {slug}
+# is a segment that can contain user text and must NEVER be stored or reported.
+#
+# status:
+#   verified               observed by tools/verify_url_rules.py on a real profile and its meaning is clear
+#   observed_unclassified  observed, but what it proves is not yet established
+#   not_observed           looked for in a real profile where the service is used, and absent
+#   unverified             authored from public knowledge; no real observation either way
+#   fixture_only           appears only in this repo's synthetic test fixtures
+#
+# Observation log:
+#   obs-2026-11-05-win: Windows; 9 Chrome profiles, Edge Default (cookies unreadable: file locked),
+#     Firefox default-release. Source: tools/results.txt. One user's profiles: absence
+#     here is weak evidence, presence is strong.
+#   obs-2026-11-05b-win: same machine, verifier v2, Edge cookies readable. Path shapes identical
+#     to the first run; whether --reveal-route-words was passed was not recorded (v3 records it).
+#     New: NotebookLM host cookies OSID, __Secure-OSID.
+#   obs-2026-11-05c-win: same machine, verifier v2 WITH --reveal-route-words (shown by revealed
+#     route words such as /oauth and /imagine; no tool_version field, so not v3). Hidden first
+#     segments therefore carry no character-class annotation.
+#   obs-2026-11-08-mac: macOS 14.5 arm64; 6 browser profiles; verifier v3 with --reveal-route-words.
+#     Second machine and second OS. Claude conversations DO appear as /chat/{id} here, unlike on the
+#     Windows machine; Claude's sessionKey cookie was absent although Claude is in use.
+schema_version: 1
+kind: url_usage_rule_pack
+services:
+  - service: ChatGPT
+    provider: OpenAI
+    hosts: [chatgpt.com, chat.openai.com]
+    used:
+      - {template: "/c/{id}", meaning: conversation, status: verified, evidence: "obs-2026-11-05-win: 434 URLs, 710 visits; obs-2026-11-08-mac: 85 URLs on chatgpt.com and chat.openai.com"}
+      - {template: "/g/{id}/c/{id}", meaning: conversation with a custom GPT, status: verified, evidence: "obs-2026-11-08-mac: 5 URLs, 7 visits; not_observed in obs-2026-11-05-win"}
+      - {template: "/g/{id}/project", meaning: project workspace, status: not_observed, evidence: obs-2026-11-05-win}
+    viewed_not_used:
+      - {template: "/share/{id}", meaning: someone else's shared conversation, status: not_observed, evidence: obs-2026-11-05-win}
+      - {template: "/gpts", meaning: GPT store browsing, status: verified, evidence: "obs-2026-11-08-mac: 1 URL; not_observed in obs-2026-11-05-win"}
+    observed_unclassified:
+      - {template: "/g/{id}", note: "custom GPT page opened; conversation not shown by URL", evidence: "obs-2026-11-05-win: 35 URLs"}
+      - {template: "/codex, /codex/{id}, /codex/{id}/{id}", note: Codex web pages, evidence: "obs-2026-11-05-win: 4 URLs"}
+      - {template: "/images, /library", note: image and library pages, evidence: "obs-2026-11-05-win: 3 URLs"}
+      - {template: "/space/{id}, /space/{id}/{id}", note: space pages, evidence: "obs-2026-11-05c-win: 2 URLs"}
+      - {template: "/work/{id}/{id}", note: work pages, evidence: "obs-2026-11-05c-win: 1 URL"}
+      - {template: "/sites, /plugins, /profile", note: navigation pages, evidence: "obs-2026-11-05c-win: 3 URLs"}
+      - {template: "/{x}/{x}", note: "first segment not a plain lowercase word, so still hidden; needs verifier v3 to classify", evidence: "obs-2026-11-05c-win: 13 URLs"}
+    not_usage:
+      - {template: "/checkout/{id}/{id}, /payments/{id}, /settings/billing", meaning: billing, evidence: obs-2026-11-05c-win}
+    signed_in_cookies:
+      - {name: "__Secure-next-auth.session-token", status: verified, evidence: obs-2026-11-05-win}
+    data_out_hosts:
+      - {suffix: oaiusercontent.com, status: verified, evidence: "obs-2026-11-05-win: 258 downloads from files*, sdmntpr* subdomains; obs-2026-11-08-mac: 57 from files.oaiusercontent.com"}
+
+  - service: Claude
+    provider: Anthropic
+    hosts: [claude.ai]
+    used:
+      - {template: "/chat/{id}", meaning: conversation, status: verified, evidence: "obs-2026-11-08-mac: 24 URLs, 50 visits. Absent in obs-2026-11-05c-win although Claude was in active use there"}
+      - {template: "/project/{id}", meaning: project workspace, status: not_observed, evidence: obs-2026-11-05c-win}
+    # Two machines disagree: the Windows machine left no /chat URLs despite active use; the Mac left 24.
+    # A /chat/{id} match is real evidence of use, but its absence is not evidence of non-use.
+    history_reliable_for_usage: false
+    viewed_not_used:
+      - {template: "/share/{id}", meaning: shared conversation, status: not_observed, evidence: obs-2026-11-05c-win}
+    observed_unclassified:
+      - {template: "/code/{id}/{id}, /code/{id}", note: "Claude Code pages; whether each is a session is unconfirmed", evidence: "obs-2026-11-05c-win: 7 URLs"}
+      - {template: "/artifact/{id}", note: "artifact page; viewing one is not necessarily use", evidence: "obs-2026-11-05c-win: 10 URLs, 11 visits"}
+      - {template: "/oauth/{id}", note: "OAuth pages; an app or CLI authorising against a Claude account", evidence: "obs-2026-11-05c-win: 13 URLs, 24 visits"}
+      - {template: "/redirect/{id}/{id}/{id}, /redirect/{id}/login", note: redirect pages, evidence: "obs-2026-11-05c-win: 14 URLs"}
+      - {template: "/new", note: "new-chat page; opening it is not use by itself", evidence: "obs-2026-11-05-win: 3 URLs, 15 visits"}
+      - {template: "/chats", note: "conversation list page; viewing it is not use by itself", evidence: "obs-2026-11-08-mac: 1 URL"}
+    not_usage:
+      - {template: "/login, /logout, /settings/billing, /upgrade, /upgrade/{id}", meaning: account and billing, evidence: obs-2026-11-05c-win}
+    signed_in_cookies:
+      - {name: sessionKey, status: verified, evidence: "obs-2026-11-05-win. Absent in obs-2026-11-08-mac although Claude is in use there: presence proves sign-in, absence proves nothing"}
+    data_out_hosts:
+      - {suffix: claude.ai, status: verified, evidence: "obs-2026-11-05-win: 35 downloads from claude.ai, 1 from downloads.claude.ai"}
+
+  - service: Gemini
+    provider: Google
+    hosts: [gemini.google.com]
+    used:
+      - {template: "/app/{id}", meaning: conversation, status: verified, evidence: "obs-2026-11-05-win: 7 URLs, 10 visits"}
+      - {template: "/gem/{id}", meaning: custom Gem, status: not_observed, evidence: obs-2026-11-05-win}
+    viewed_not_used:
+      - {template: "/share/{id}", meaning: shared conversation, status: not_observed, evidence: obs-2026-11-05-win}
+      - {template: "/app", meaning: Gemini home with no conversation open, status: observed_unclassified, evidence: "obs-2026-11-05-win: 4 URLs"}
+    observed_unclassified:
+      - {template: "/app/{id}/{id}", note: "deeper conversation path; meaning unknown", evidence: "obs-2026-11-05-win: 3 URLs"}
+      - {template: "/veo", note: video generation page; visiting is not generating, evidence: "obs-2026-11-05c-win: 1 URL"}
+    # Google sign-in cookies live on .google.com and are account-wide. Only COMPASS was set on
+    # gemini.google.com itself (obs-2026-11-05-win); its meaning is unknown, so no sign-in rule.
+    signed_in_cookies: []
+
+  - service: Perplexity
+    provider: Perplexity
+    hosts: [perplexity.ai, www.perplexity.ai]
+    used:
+      - {template: "/search/{slug}", meaning: answered query (slug is derived from the question text), status: unverified, evidence: "obs-2026-11-05-win had a single home-page visit only"}
+      - {template: "/spaces/{slug}", meaning: space, status: unverified}
+    viewed_not_used:
+      - {template: "/discover", meaning: news feed, status: unverified}
+    signed_in_cookies:
+      - {name: "__Secure-next-auth.session-token", status: unverified, evidence: "absent in obs-2026-11-05-win, consistent with no sign-in there"}
+
+  - service: Microsoft Copilot
+    provider: Microsoft
+    hosts: [copilot.microsoft.com]
+    used:
+      - {template: "/chats/{id}", meaning: conversation, status: unverified}
+    signed_in_cookies: []
+
+  - service: DeepSeek Chat
+    provider: DeepSeek
+    hosts: [chat.deepseek.com]
+    used:
+      - {template: "/a/chat/s/{id}", meaning: conversation, status: unverified}
+    signed_in_cookies: []
+
+  - service: Grok
+    provider: xAI
+    hosts: [grok.com]
+    used:
+      - {template: "/chat/{id}", meaning: conversation, status: not_observed, evidence: "obs-2026-11-05-win (grok.com visited: 11 URLs)"}
+    viewed_not_used:
+      - {template: "/share/{id}", meaning: shared conversation, status: not_observed, evidence: obs-2026-11-05-win}
+    observed_unclassified:
+      - {template: "/imagine/{id}/{id}", note: "Grok Imagine item page; likely a generation, unconfirmed", evidence: "obs-2026-11-05c-win: 5 URLs, 14 visits"}
+      - {template: "/imagine", note: "Grok Imagine landing page; visiting is not generating", evidence: "obs-2026-11-05c-win: 3 URLs, 15 visits"}
+      - {template: "/{x}", note: "first segment not a plain lowercase word; needs verifier v3", evidence: "obs-2026-11-05c-win: 3 URLs"}
+    signed_in_cookies:
+      - {name: sso, status: observed_unclassified, evidence: "obs-2026-11-05-win; needs a signed-out control profile to confirm"}
+      - {name: sso-rw, status: observed_unclassified, evidence: obs-2026-11-05-win}
+
+  - service: Poe
+    provider: Quora
+    hosts: [poe.com]
+    used:
+      - {template: "/chat/{id}", meaning: conversation, status: unverified}
+    signed_in_cookies: []
+
+  - service: Le Chat
+    provider: Mistral AI
+    hosts: [chat.mistral.ai]
+    used:
+      - {template: "/chat/{id}", meaning: conversation, status: unverified}
+    signed_in_cookies: []
+
+  - service: NotebookLM
+    provider: Google
+    hosts: [notebooklm.google.com]
+    used:
+      - {template: "/notebook/{id}", meaning: notebook, status: unverified}
+    signed_in_cookies:
+      - {name: __Secure-OSID, status: observed_unclassified, evidence: "obs-2026-11-05b-win; set on notebooklm.google.com itself, unlike account-wide Google cookies; no NotebookLM history URLs were seen, so its meaning is unconfirmed"}
+      - {name: OSID, status: observed_unclassified, evidence: obs-2026-11-05b-win}

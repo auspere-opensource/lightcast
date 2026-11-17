@@ -1,0 +1,47 @@
+# ADDITIVE candidate seed catalog of named AI destinations, not a replacement for providers.yaml.
+# This is a curated STARTING SET, not comprehensive. Review and update it regularly.
+# Match describes endpoint identity/website access, NOT proof of an inference request.
+# When loaded, merge with original v1 rules; preserve original IDs and dedupe rows.
+version: 1
+rules:
+  # API destinations (service-specific hosts)
+  - {id: extra-groq-api, provider: Groq, service: Groq API, category: api, match: {type: exact_hostname, value: api.groq.com}, base_confidence: high}
+  - {id: extra-mistral-api, provider: Mistral AI, service: Mistral API, category: api, match: {type: exact_hostname, value: api.mistral.ai}, base_confidence: high}
+  - {id: extra-deepseek-api, provider: DeepSeek, service: DeepSeek API, category: api, match: {type: exact_hostname, value: api.deepseek.com}, base_confidence: high}
+  - {id: extra-deepinfra-api, provider: DeepInfra, service: DeepInfra Inference API, category: api, match: {type: exact_hostname, value: api.deepinfra.com}, base_confidence: high}
+  - {id: extra-replicate-api, provider: Replicate, service: Replicate API, category: api, match: {type: exact_hostname, value: api.replicate.com}, base_confidence: high}
+  - {id: extra-elevenlabs-api, provider: ElevenLabs, service: ElevenLabs API, category: api, match: {type: exact_hostname, value: api.elevenlabs.io}, base_confidence: high}
+  - {id: extra-fal-run-api, provider: fal.ai, service: fal.ai inference, category: api, match: {type: exact_hostname, value: fal.run}, base_confidence: high}
+  - {id: extra-fireworks-api, provider: Fireworks AI, service: Fireworks Inference API, category: api, match: {type: exact_hostname, value: api.gofireworks.org}, base_confidence: high}
+  - {id: extra-huggingface-router, provider: Hugging Face, service: Inference Providers Router, category: router, match: {type: exact_hostname, value: router.huggingface.co}, base_confidence: high}
+  - {id: extra-nvidia-nim-api, provider: NVIDIA, service: NVIDIA Hosted NIM API, category: api, match: {type: exact_hostname, value: integrate.api.nvidia.com}, base_confidence: high}
+  - {id: extra-xai-api, provider: xAI, service: Grok API, category: api, match: {type: exact_hostname, value: api.x.ai}, base_confidence: high}
+  - {id: extra-xai-us-api, provider: xAI, service: Grok US API, category: api, match: {type: exact_hostname, value: us.api.x.ai}, base_confidence: high}
+  - {id: extra-cerebras-api, provider: Cerebras, service: Cerebras Inference API, category: api, match: {type: exact_hostname, value: api.cerebras.ai}, base_confidence: high}
+  # AI-branded web service endpoints: endpoint accessed, NOT inference confirmed.
+  - {id: extra-deepseek-web, provider: DeepSeek, service: DeepSeek Chat, category: chat_web, match: {type: exact_hostname, value: chat.deepseek.com}, base_confidence: high}
+  - {id: extra-perplexity-web, provider: Perplexity, service: Perplexity Search, category: chat_web, match: {type: exact_hostname, value: perplexity.ai}, base_confidence: high}
+  - {id: extra-poe-web, provider: Quora, service: Poe, category: chat_web, match: {type: exact_hostname, value: poe.com}, base_confidence: high}
+  - {id: extra-characterai-web, provider: Character.AI, service: Character.AI, category: chat_web, match: {type: exact_hostname, value: character.ai}, base_confidence: high}
+  - {id: extra-grok-web, provider: xAI, service: Grok, category: chat_web, match: {type: exact_hostname, value: grok.com}, base_confidence: high}
+  - {id: extra-notebooklm-web, provider: Google, service: NotebookLM, category: chat_web, match: {type: exact_hostname, value: notebooklm.google.com}, base_confidence: high}
+  - {id: extra-google-ai-studio-web, provider: Google, service: Google AI Studio, category: chat_web, match: {type: exact_hostname, value: aistudio.google.com}, base_confidence: high}
+  - {id: extra-you-ai-web, provider: You.com, service: You.com AI Search, category: chat_web, match: {type: exact_hostname, value: you.com}, base_confidence: high}
+  # Creative AI destination websites (site visit != generation)
+  - {id: extra-midjourney-web, provider: Midjourney, service: Midjourney, category: supporting, match: {type: exact_hostname, value: midjourney.com}, base_confidence: high}
+  - {id: extra-runway-web, provider: Runway, service: Runway AI, category: supporting, match: {type: exact_hostname, value: runwayml.com}, base_confidence: high}
+  - {id: extra-leonardo-web, provider: Leonardo AI, service: Leonardo AI, category: supporting, match: {type: exact_hostname, value: leonardo.ai}, base_confidence: high}
+  - {id: extra-suno-web, provider: Suno, service: Suno, category: supporting, match: {type: exact_hostname, value: suno.com}, base_confidence: high}
+  - {id: extra-udio-web, provider: Udio, service: Udio, category: supporting, match: {type: exact_hostname, value: udio.com}, base_confidence: high}
+  - {id: extra-ideogram-web, provider: Ideogram, service: Ideogram, category: supporting, match: {type: exact_hostname, value: ideogram.ai}, base_confidence: high}
+  - {id: extra-luma-web, provider: Luma AI, service: Luma AI, category: supporting, match: {type: exact_hostname, value: luma.ai}, base_confidence: high}
+  # AI software and developer platforms; product pages can be visited without use.
+  - {id: extra-cursor-web, provider: Anysphere, service: Cursor, category: coding_assistant, match: {type: exact_hostname, value: cursor.com}, base_confidence: high}
+  - {id: extra-windsurf-web, provider: Windsurf, service: Windsurf, category: coding_assistant, match: {type: exact_hostname, value: windsurf.com}, base_confidence: high}
+  - {id: extra-bolt-web, provider: StackBlitz, service: Bolt, category: coding_assistant, match: {type: exact_hostname, value: bolt.new}, base_confidence: high}
+  - {id: extra-v0-web, provider: Vercel, service: v0, category: coding_assistant, match: {type: exact_hostname, value: v0.app}, base_confidence: high}
+  - {id: extra-lovable-web, provider: Lovable, service: Lovable, category: coding_assistant, match: {type: exact_hostname, value: lovable.dev}, base_confidence: high}
+  - {id: extra-gamma-web, provider: Gamma, service: Gamma AI, category: supporting, match: {type: exact_hostname, value: gamma.app}, base_confidence: high}
+  # Do NOT add generic api.cloudflare.com, googleapis.com, github.com, microsoft.com,
+  # openai.azure.com apex, or amazonaws.com as high-confidence AI rules.
+  # Conditional paths/template hostnames belong in signature_rules.addon.yaml.

@@ -1,0 +1,416 @@
+{
+ "schema_version": 1,
+ "researched_at": "2026-11-08",
+ "method": "Each page was opened (not a search snippet). source_kind: primary = the provider's own legal page; secondary = an encyclopedic or press source used because primary pages refused automated fetches. processing_countries is filled only where the provider's own page states where data is stored or processed.",
+ "providers": [
+  {
+   "id": "azure_openai",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.microsoft.com/en-us/servicesagreement",
+   "source_quote": "you're contracting with Microsoft Corporation, One Microsoft Way, Redmond, WA 98052, U.S.A.",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": "Prompts and responses are processed within the customer-specified geography unless a Global or DataZone deployment is used (https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy)"
+  },
+  {
+   "id": "anthropic",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.anthropic.com/legal/privacy",
+   "source_quote": "Anthropic PBC ... 548 Market St, PMB 90375, San Francisco, CA 94104 (United States)",
+   "regional_entities": [
+    {
+     "region": "EEA, UK, Switzerland",
+     "entity": "Anthropic Ireland, Limited",
+     "country": "IE"
+    }
+   ],
+   "processing_countries": [],
+   "processing_note": "personal data is transferred to servers in the US, or to other countries outside the EEA"
+  },
+  {
+   "id": "aws_bedrock",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://aws.amazon.com/agreement/",
+   "source_quote": "Amazon Web Services, Inc. 410 Terry Avenue North, Seattle, WA 98109-5210 U.S.A.",
+   "regional_entities": [
+    {
+     "region": "Europe, Middle East, Africa (excl. South Africa)",
+     "entity": "Amazon Web Services EMEA SARL",
+     "country": "LU"
+    },
+    {
+     "region": "Canada",
+     "entity": "Amazon Web Services Canada, Inc.",
+     "country": "CA"
+    },
+    {
+     "region": "Japan",
+     "entity": "Amazon Web Services Japan G.K.",
+     "country": "JP"
+    },
+    {
+     "region": "India",
+     "entity": "Amazon Web Services India Private Limited",
+     "country": "IN"
+    },
+    {
+     "region": "Australia",
+     "entity": "Amazon Web Services Australia Pty Ltd",
+     "country": "AU"
+    },
+    {
+     "region": "Singapore",
+     "entity": "Amazon Web Services Singapore Private Limited",
+     "country": "SG"
+    },
+    {
+     "region": "Brazil",
+     "entity": "Amazon AWS Serviços Brasil Ltda.",
+     "country": "BR"
+    }
+   ],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "google",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://policies.google.com/terms?hl=en-US",
+   "source_quote": "Google LLC, organized under the laws of the State of Delaware, USA ... Mountain View, California 94043, USA",
+   "regional_entities": [
+    {
+     "region": "EU (consumer services)",
+     "entity": "Google Ireland Limited",
+     "country": "IE"
+    }
+   ],
+   "processing_countries": [],
+   "processing_note": "Gemini API paid terms: data may be stored transiently or cached in any country in which Google or its agents maintain facilities"
+  },
+  {
+   "id": "mistral",
+   "hq_country": "FR",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://legal.mistral.ai/terms/commercial-terms-of-service",
+   "source_quote": "Mistral AI ... registered office 15 rue des Halles, 75001 Paris, France",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "cohere",
+   "hq_country": "CA",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://cohere.com/privacy",
+   "source_quote": "a Canadian company subject to Canadian federal privacy laws ... Toronto, ON Canada",
+   "regional_entities": [],
+   "processing_countries": [
+    "US"
+   ],
+   "processing_note": "cloud infrastructure provided by GCP in the United States; transfers to Canada, the United States and the United Kingdom"
+  },
+  {
+   "id": "deepseek",
+   "hq_country": "CN",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
+   "source_quote": "Hangzhou DeepSeek Artificial Intelligence Co., Ltd. ... with its registered address in China",
+   "regional_entities": [],
+   "processing_countries": [
+    "CN"
+   ],
+   "processing_note": "we directly collect, process and store your Personal Data in People's Republic of China"
+  },
+  {
+   "id": "moonshot",
+   "hq_country": "CN",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.kimi.com/user/agreement/modelUse",
+   "source_quote": "Beijing Moonshot entity (北京月之暗面科技有限公司); mainland China law applies",
+   "regional_entities": [
+    {
+     "region": "International API (platform.kimi.ai)",
+     "entity": "MOONSHOT AI PTE. LTD.",
+     "country": "SG"
+    }
+   ],
+   "processing_countries": [],
+   "processing_note": "international platform privacy policy: information stored on servers located in Singapore"
+  },
+  {
+   "id": "groq",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://groq.com/terms-of-use",
+   "source_quote": "Groq LLC ... Mountain View, CA ... laws of the State of California, USA",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "perplexity",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.perplexity.ai/hub/legal/terms-of-service",
+   "source_quote": "Perplexity AI, Inc. ... San Francisco, CA 94114 ... The Services are operated by us in the United States.",
+   "regional_entities": [],
+   "processing_countries": [
+    "US"
+   ],
+   "processing_note": "The Services are operated by us in the United States."
+  },
+  {
+   "id": "together",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.together.ai/terms-of-service",
+   "source_quote": "Together Computer, Inc., a Delaware corporation ... San Francisco, CA 94103",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "fireworks",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://fireworks.ai/terms-of-service",
+   "source_quote": "provided by Fireworks.ai, Inc. ... San Mateo, CA 94402",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "openrouter",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://openrouter.ai/terms",
+   "source_quote": "The Service is offered by OpenRouter, Inc. ... New York, NY 10016, United States",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "replicate",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://replicate.com/terms",
+   "source_quote": "Replicate, LLC, 101 Townsend St, San Francisco, CA 94107",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "huggingface",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://huggingface.co/privacy",
+   "source_quote": "The Company and its servers are located in the United States.",
+   "regional_entities": [
+    {
+     "region": "EU (main establishment)",
+     "entity": "Hugging Face, SAS",
+     "country": "FR"
+    }
+   ],
+   "processing_countries": [
+    "US"
+   ],
+   "processing_note": "may be stored and processed in the United States or any other country"
+  },
+  {
+   "id": "elevenlabs",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://elevenlabs.io/privacy-policy",
+   "source_quote": "Eleven Labs Inc. ... 169 Madison Avenue, #2484, New York, NY 10016, United States",
+   "regional_entities": [
+    {
+     "region": "EEA, UK, Switzerland (data controller)",
+     "entity": "ElevenLabs Poland sp. z o.o.",
+     "country": "PL"
+    }
+   ],
+   "processing_countries": [
+    "US"
+   ],
+   "processing_note": "Wherever you are, your personal information will be transferred to the United States for storage."
+  },
+  {
+   "id": "suno",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://suno.com/terms",
+   "source_quote": "Suno is headquartered in the United States. ... Cambridge, MA 02138",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "stability",
+   "hq_country": "GB",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://stability.ai/2025-terms-of-service",
+   "source_quote": "Stability AI Ltd, a private limited company incorporated in England and Wales ... London W11 3JY",
+   "regional_entities": [
+    {
+     "region": "Rest of world",
+     "entity": "Stability AI US Services Corporation",
+     "country": "US"
+    }
+   ],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "bfl",
+   "hq_country": "DE",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://bfl.ai/legal/imprint",
+   "source_quote": "BFL GmbH ... 79106 Freiburg im Breisgau Germany",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": "terms of service are governed by Delaware law"
+  },
+  {
+   "id": "runway",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://runway.com/terms-of-use",
+   "source_quote": "RUNWAY AI, INC. ... offered by Company from its facilities in the United States of America",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "luma",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://lumalabs.ai/legal/tos",
+   "source_quote": "The Services are offered by Luma AI, Inc., located at 715 Alma Street, Palo Alto, CA 94301.",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "fal",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://fal.ai/terms",
+   "source_quote": "fal – Features & Labels, Inc. ... San Francisco, CA 94114",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "deepgram",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://deepgram.com/terms",
+   "source_quote": "Deepgram, Inc., 548 Market St, Suite 25104, San Francisco, CA 94104-5401",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "assemblyai",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.assemblyai.com/legal/terms-of-service",
+   "source_quote": "AssemblyAI, Inc. ... New York, NY 10016",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "cartesia",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://cartesia.ai/legal/terms",
+   "source_quote": "The Services are controlled and offered by Cartesia from its facilities in the United States of America.",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "voyage",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.voyageai.com/privacy",
+   "source_quote": "Voyage AI Innovations, Inc. ... © 2026 MongoDB, Inc.; data transferred to United States and processed there",
+   "regional_entities": [],
+   "processing_countries": [
+    "US"
+   ],
+   "processing_note": "part of MongoDB, Inc. (New York, US)"
+  },
+  {
+   "id": "github_copilot",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+   "source_quote": "GitHub, Inc. 88 Colin P. Kelly Jr. St. San Francisco, CA 94107 United States",
+   "regional_entities": [
+    {
+     "region": "EEA, UK, Switzerland (data controller)",
+     "entity": "GitHub B.V.",
+     "country": "NL"
+    }
+   ],
+   "processing_countries": [],
+   "processing_note": "stores and processes personal data in a variety of locations, including your local region and the United States"
+  },
+  {
+   "id": "microsoft_copilot",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://www.microsoft.com/en-us/servicesagreement",
+   "source_quote": "you're contracting with Microsoft Corporation, One Microsoft Way, Redmond, WA 98052, U.S.A.",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  },
+  {
+   "id": "poe",
+   "hq_country": "US",
+   "status": "verified",
+   "source_kind": "primary",
+   "source_url": "https://poe.com/tos",
+   "source_quote": "Quora, Inc. and its affiliates ... the substantive laws of the State of California in the United States of America",
+   "regional_entities": [],
+   "processing_countries": [],
+   "processing_note": ""
+  }
+ ]
+}

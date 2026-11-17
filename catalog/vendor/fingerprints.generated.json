@@ -1,0 +1,188 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-11-17T19:55:50+00:00",
+ "generator": "tools/harvest_fingerprints.py",
+ "source": "Candidate repos from aitools.json (entry tags/topics); identifiers read from each repo's own manifests via GitHub GraphQL at HEAD.",
+ "notes": [
+  "A fingerprint identifies installed or configured tooling; it does not prove use.",
+  "The catalog is limited to one high-confidence fingerprint from each of ten distinct MIT-licensed repositories.",
+  "agent_skill rows are high confidence only when the local SKILL.md git-blob SHA-1 matches skill_md_blob_oid."
+ ],
+ "stats": {
+  "candidate_repos": 10,
+  "repos_fetched": 10,
+  "repos_not_found": 0,
+  "repos_failed": 0,
+  "graphql_other_errors": 0,
+  "skipped_no_ai_evidence": 0,
+  "repos_with_fingerprints": 10,
+  "fingerprints": 10,
+  "by_type": {
+   "agent_skill": 2,
+   "mcp_registry_name": 2,
+   "npm_package": 3,
+   "pypi_package": 2,
+   "vscode_extension": 1
+  },
+  "by_confidence": {
+   "high": 10
+  },
+  "seconds": 0.0
+ },
+ "fingerprints": [
+  {
+   "type": "npm_package",
+   "identifier": "@apify/actors-mcp-server",
+   "where_found_locally": "MCP config args (npx/bunx), global node_modules, lockfiles",
+   "confidence": "high",
+   "source_repo": "apify/apify-mcp-server",
+   "repo_license": "MIT",
+   "repo_stars": 14923,
+   "repo_archived": false,
+   "candidate_groups": [
+    "mcp"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "mcp_registry_name",
+   "identifier": "io.github.bytebase/dbhub",
+   "where_found_locally": "MCP registry / client config server name",
+   "confidence": "high",
+   "source_repo": "bytebase/dbhub",
+   "repo_license": "MIT",
+   "repo_stars": 3793,
+   "repo_archived": false,
+   "candidate_groups": [
+    "mcp"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "mcp_registry_name",
+   "identifier": "io.github.CursorTouch/Windows-MCP",
+   "where_found_locally": "MCP registry / client config server name",
+   "confidence": "high",
+   "source_repo": "CursorTouch/Windows-MCP",
+   "repo_license": "MIT",
+   "repo_stars": 11140,
+   "repo_archived": false,
+   "candidate_groups": [
+    "mcp"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "agent_skill",
+   "identifier": "playwright-skill",
+   "where_found_locally": "~/.claude/skills/<name>/SKILL.md, .claude/skills, .agents/skills",
+   "confidence": "high",
+   "skill_md_blob_oid": "8e002881ae65ebfa13f61a99d50678622c0ae5bf",
+   "match_rule": "high when local SKILL.md git-blob SHA-1 equals skill_md_blob_oid; low on name only",
+   "source_repo": "lackeyjb/playwright-skill",
+   "repo_license": "MIT",
+   "repo_stars": 3266,
+   "repo_archived": false,
+   "candidate_groups": [
+    "skill_plugin"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "vscode_extension",
+   "identifier": "poml-team.poml",
+   "where_found_locally": "~/.vscode/extensions/<publisher>.<name>-<version> (also Cursor/Windsurf extension dirs)",
+   "confidence": "high",
+   "source_repo": "microsoft/poml",
+   "repo_license": "MIT",
+   "repo_stars": 4963,
+   "repo_archived": false,
+   "candidate_groups": [
+    "vscode"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "agent_skill",
+   "identifier": "prompt-master",
+   "where_found_locally": "~/.claude/skills/<name>/SKILL.md, .claude/skills, .agents/skills",
+   "confidence": "high",
+   "skill_md_blob_oid": "742deafaf4222f9f0e9d9410e72483dad64fe716",
+   "match_rule": "high when local SKILL.md git-blob SHA-1 equals skill_md_blob_oid; low on name only",
+   "source_repo": "nidhinjs/prompt-master",
+   "repo_license": "MIT",
+   "repo_stars": 15562,
+   "repo_archived": false,
+   "candidate_groups": [
+    "skill_plugin"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "npm_package",
+   "identifier": "@anthropic-plugins/claude-octopus",
+   "where_found_locally": "MCP config args (npx/bunx), global node_modules, lockfiles",
+   "confidence": "high",
+   "source_repo": "nyldn/claude-octopus",
+   "repo_license": "MIT",
+   "repo_stars": 4386,
+   "repo_archived": false,
+   "candidate_groups": [
+    "skill_plugin"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "pypi_package",
+   "identifier": "mcpo",
+   "where_found_locally": "MCP config args (uvx/pipx), site-packages dist-info",
+   "confidence": "high",
+   "source_repo": "open-webui/mcpo",
+   "repo_license": "MIT",
+   "repo_stars": 4418,
+   "repo_archived": false,
+   "candidate_groups": [
+    "mcp"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "npm_package",
+   "identifier": "mcporter",
+   "where_found_locally": "MCP config args (npx/bunx), global node_modules, lockfiles",
+   "confidence": "high",
+   "source_repo": "openclaw/mcporter",
+   "repo_license": "MIT",
+   "repo_stars": 5107,
+   "repo_archived": false,
+   "candidate_groups": [
+    "mcp"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  },
+  {
+   "type": "pypi_package",
+   "identifier": "mcp-atlassian",
+   "where_found_locally": "MCP config args (uvx/pipx), site-packages dist-info",
+   "confidence": "high",
+   "source_repo": "sooperset/mcp-atlassian",
+   "repo_license": "MIT",
+   "repo_stars": 6087,
+   "repo_archived": false,
+   "candidate_groups": [
+    "mcp"
+   ],
+   "ai_evidence": true,
+   "also_in_repos": []
+  }
+ ]
+}

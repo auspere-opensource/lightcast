@@ -1,0 +1,94 @@
+lightcast @VERSION@ for Windows (x64) - how to install and run
+========================================================================
+
+This build is NOT code-signed for Windows. Windows treats unsigned
+programs downloaded from the internet with suspicion, so follow these
+steps in order. lightcast does not need administrator rights; run it
+as your normal user.
+
+You need: lightcast-@VERSION@-x86_64-pc-windows-msvc.zip and
+SHA256SUMS, from the same release folder.
+
+
+1. Check the download is intact (before unzipping)
+------------------------------------------------------------------------
+Open PowerShell in the folder that holds the zip and run:
+
+    Get-FileHash .\lightcast-@VERSION@-x86_64-pc-windows-msvc.zip -Algorithm SHA256
+
+Compare the long hex string with the line for the same file name in
+SHA256SUMS (case does not matter). If they differ, delete the download
+and get it again. Do not run it.
+
+
+2. Unblock the zip (before unzipping)
+------------------------------------------------------------------------
+Files downloaded from the internet carry a "from the internet" mark.
+Removing it from the zip first means the extracted program is not
+marked either. Either:
+
+    Unblock-File .\lightcast-@VERSION@-x86_64-pc-windows-msvc.zip
+
+or: right-click the zip > Properties > tick "Unblock" at the bottom of
+the General tab > OK. (No "Unblock" box means the mark is not there.)
+
+
+3. Unzip
+------------------------------------------------------------------------
+    Expand-Archive .\lightcast-@VERSION@-x86_64-pc-windows-msvc.zip -DestinationPath .
+    cd .\lightcast-@VERSION@-x86_64-pc-windows-msvc
+
+
+4. Run it from PowerShell or Windows Terminal
+------------------------------------------------------------------------
+    .\lightcast.exe
+
+It is a command-line program: double-clicking it in Explorer opens a
+window that closes as soon as the report is printed. Useful options:
+
+    .\lightcast.exe --html report.html     self-contained HTML report
+    .\lightcast.exe --json report.json     full report as JSON
+    .\lightcast.exe --verbose              every finding with evidence
+    .\lightcast.exe --color never          plain text, no colour
+    .\lightcast.exe --help                 all options
+
+
+If Windows still stops it
+------------------------------------------------------------------------
+"Windows protected your PC" (Microsoft Defender SmartScreen):
+    Click "More info", check the publisher reads "Unknown publisher"
+    and the name is lightcast.exe, then click "Run anyway". This
+    appears because the program is not code-signed, not because
+    anything was detected.
+
+"Smart App Control blocked an app that may be unsafe":
+    Smart App Control (Windows 11) blocks unsigned programs and has no
+    per-program override. Do NOT turn Smart App Control off to run
+    this: on most PCs it cannot be turned back on without resetting
+    Windows. Wait for a code-signed release, or run lightcast on
+    another machine.
+
+Microsoft Defender quarantines the file:
+    Do not add an exclusion. Check the hash again (step 1), and report
+    it to the project with the detection name.
+
+Colour codes such as "[1m" or "\033[0m" appear in the output:
+    Your console cannot show colour. Add --color never.
+
+
+About the report
+------------------------------------------------------------------------
+- It runs locally and sends nothing anywhere (see PRIVACY.md). The only
+  exception is --resolve, which you must ask for.
+- Chrome and Edge lock their cookie file while they run, and Edge keeps
+  running in the background after its windows close. The report then
+  says sign-in evidence was skipped; history and downloads still count.
+  To include it, end msedge.exe (and chrome.exe) in Task Manager, or in
+  Edge turn off Settings > System and performance > "Startup boost" and
+  "Continue running background extensions and apps", then run again.
+- Exit code 1 means a finding at or above --fail-on (default: critical)
+  was found. It is not a crash.
+
+Signature files (*.sigstore.json) in this release are made with a test
+key: they prove the release pipeline works, not who published it. See
+TEST-SIGNED-READ-ME.txt if present.

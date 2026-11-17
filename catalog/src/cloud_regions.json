@@ -1,0 +1,526 @@
+{
+ "schema_version": 1,
+ "retrieved": "2026-11-08",
+ "method": "Region codes and locations copied from the clouds' own documentation pages, opened 2026-11-08. A region code names where the endpoint's data centers are; it is the strongest local evidence of where a request is processed.",
+ "notes": [
+  "AWS: commercial regions from the AWS Regions page (Geography column gives the country). GovCloud codes from the Bedrock endpoints page; China codes from the AWS China endpoints guide.",
+  "AWS Bedrock: bedrock_runtime lists the 22 regions in the 'Amazon Bedrock runtime APIs' table of https://docs.aws.amazon.com/general/latest/gr/bedrock.html; model availability varies by region.",
+  "GCP: the Vertex AI locations page now redirects to the Gemini Enterprise Agent Platform docs. 'global', 'us' and 'eu' come from the generative AI locations page, which warns that these endpoints do not guarantee data residency; they carry no single country.",
+  "GCP southamerica-west1: the accelerators table says Osasco, Brazil, contradicting the region list and feature table (Santiago, Chile); Santiago/CL is used."
+ ],
+ "aws": {
+  "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html",
+  "regions": [
+   {
+    "code": "us-east-1",
+    "location": "US East (N. Virginia)",
+    "country": "US",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "us-east-2",
+    "location": "US East (Ohio)",
+    "country": "US",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "us-west-1",
+    "location": "US West (N. California)",
+    "country": "US",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "us-west-2",
+    "location": "US West (Oregon)",
+    "country": "US",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "af-south-1",
+    "location": "Africa (Cape Town)",
+    "country": "ZA",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-east-1",
+    "location": "Asia Pacific (Hong Kong)",
+    "country": "HK",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-east-2",
+    "location": "Asia Pacific (Taipei)",
+    "country": "TW",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-south-1",
+    "location": "Asia Pacific (Mumbai)",
+    "country": "IN",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-south-2",
+    "location": "Asia Pacific (Hyderabad)",
+    "country": "IN",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-1",
+    "location": "Asia Pacific (Singapore)",
+    "country": "SG",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-2",
+    "location": "Asia Pacific (Sydney)",
+    "country": "AU",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-3",
+    "location": "Asia Pacific (Jakarta)",
+    "country": "ID",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-4",
+    "location": "Asia Pacific (Melbourne)",
+    "country": "AU",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-5",
+    "location": "Asia Pacific (Malaysia)",
+    "country": "MY",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-6",
+    "location": "Asia Pacific (New Zealand)",
+    "country": "NZ",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-southeast-7",
+    "location": "Asia Pacific (Thailand)",
+    "country": "TH",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-northeast-1",
+    "location": "Asia Pacific (Tokyo)",
+    "country": "JP",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-northeast-2",
+    "location": "Asia Pacific (Seoul)",
+    "country": "KR",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ap-northeast-3",
+    "location": "Asia Pacific (Osaka)",
+    "country": "JP",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ca-central-1",
+    "location": "Canada (Central)",
+    "country": "CA",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "ca-west-1",
+    "location": "Canada West (Calgary)",
+    "country": "CA",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-central-1",
+    "location": "Europe (Frankfurt)",
+    "country": "DE",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-central-2",
+    "location": "Europe (Zurich)",
+    "country": "CH",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-west-1",
+    "location": "Europe (Ireland)",
+    "country": "IE",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-west-2",
+    "location": "Europe (London)",
+    "country": "GB",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-west-3",
+    "location": "Europe (Paris)",
+    "country": "FR",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-south-1",
+    "location": "Europe (Milan)",
+    "country": "IT",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-south-2",
+    "location": "Europe (Spain)",
+    "country": "ES",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "eu-north-1",
+    "location": "Europe (Stockholm)",
+    "country": "SE",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "il-central-1",
+    "location": "Israel (Tel Aviv)",
+    "country": "IL",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "mx-central-1",
+    "location": "Mexico (Central)",
+    "country": "MX",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "me-south-1",
+    "location": "Middle East (Bahrain)",
+    "country": "BH",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "me-central-1",
+    "location": "Middle East (UAE)",
+    "country": "AE",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "sa-east-1",
+    "location": "South America (São Paulo)",
+    "country": "BR",
+    "source_url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+   },
+   {
+    "code": "us-gov-east-1",
+    "location": "AWS GovCloud (US-East)",
+    "country": "US",
+    "source_url": "https://docs.aws.amazon.com/general/latest/gr/bedrock.html"
+   },
+   {
+    "code": "us-gov-west-1",
+    "location": "AWS GovCloud (US-West)",
+    "country": "US",
+    "source_url": "https://docs.aws.amazon.com/general/latest/gr/bedrock.html"
+   },
+   {
+    "code": "cn-north-1",
+    "location": "China (Beijing)",
+    "country": "CN",
+    "source_url": "https://docs.amazonaws.cn/en_us/aws/latest/userguide/endpoints-arns.html"
+   },
+   {
+    "code": "cn-northwest-1",
+    "location": "China (Ningxia)",
+    "country": "CN",
+    "source_url": "https://docs.amazonaws.cn/en_us/aws/latest/userguide/endpoints-arns.html"
+   }
+  ],
+  "bedrock_runtime": [
+   "us-east-1",
+   "us-east-2",
+   "us-west-2",
+   "ap-south-1",
+   "ap-south-2",
+   "ap-northeast-1",
+   "ap-northeast-2",
+   "ap-northeast-3",
+   "ap-southeast-1",
+   "ap-southeast-2",
+   "ca-central-1",
+   "eu-central-1",
+   "eu-central-2",
+   "eu-west-1",
+   "eu-west-2",
+   "eu-west-3",
+   "eu-south-1",
+   "eu-south-2",
+   "eu-north-1",
+   "sa-east-1",
+   "us-gov-east-1",
+   "us-gov-west-1"
+  ],
+  "bedrock_source_url": "https://docs.aws.amazon.com/general/latest/gr/bedrock.html"
+ },
+ "gcp": {
+  "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations",
+  "regions": [
+   {
+    "code": "us-central1",
+    "location": "Council Bluffs, Iowa",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-east1",
+    "location": "Moncks Corner, South Carolina",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-east4",
+    "location": "Ashburn, Virginia",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-east5",
+    "location": "Columbus, Ohio",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-south1",
+    "location": "Dallas, Texas",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-west1",
+    "location": "The Dalles, Oregon",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-west2",
+    "location": "Los Angeles, California",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-west3",
+    "location": "Salt Lake City, Utah",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "us-west4",
+    "location": "Las Vegas, Nevada",
+    "country": "US",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "northamerica-northeast1",
+    "location": "Montréal, Québec",
+    "country": "CA",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "northamerica-northeast2",
+    "location": "Toronto, Ontario",
+    "country": "CA",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "southamerica-east1",
+    "location": "Osasco, São Paulo, Brazil",
+    "country": "BR",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "southamerica-west1",
+    "location": "Santiago, Chile",
+    "country": "CL",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "africa-south1",
+    "location": "Johannesburg, South Africa",
+    "country": "ZA",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-central2",
+    "location": "Warsaw, Poland",
+    "country": "PL",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-north1",
+    "location": "Hamina, Finland",
+    "country": "FI",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-southwest1",
+    "location": "Madrid, Spain",
+    "country": "ES",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west1",
+    "location": "St. Ghislain, Belgium",
+    "country": "BE",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west2",
+    "location": "London, England",
+    "country": "GB",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west3",
+    "location": "Frankfurt, Germany",
+    "country": "DE",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west4",
+    "location": "Eemshaven, Netherlands",
+    "country": "NL",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west6",
+    "location": "Zürich, Switzerland",
+    "country": "CH",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west8",
+    "location": "Milan, Italy",
+    "country": "IT",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west9",
+    "location": "Paris, France",
+    "country": "FR",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "europe-west12",
+    "location": "Turin, Italy",
+    "country": "IT",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-east1",
+    "location": "Changhua County, Taiwan",
+    "country": "TW",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-east2",
+    "location": "Hong Kong",
+    "country": "HK",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-northeast1",
+    "location": "Tokyo, Japan",
+    "country": "JP",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-northeast2",
+    "location": "Osaka, Japan",
+    "country": "JP",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-northeast3",
+    "location": "Seoul, South Korea",
+    "country": "KR",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-south1",
+    "location": "Mumbai, India",
+    "country": "IN",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-south2",
+    "location": "Delhi, India",
+    "country": "IN",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-southeast1",
+    "location": "Jurong West, Singapore",
+    "country": "SG",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "asia-southeast2",
+    "location": "Jakarta, Indonesia",
+    "country": "ID",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "australia-southeast1",
+    "location": "Sydney, Australia",
+    "country": "AU",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "australia-southeast2",
+    "location": "Melbourne, Australia",
+    "country": "AU",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "me-central1",
+    "location": "Doha, Qatar",
+    "country": "QA",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "me-central2",
+    "location": "Dammam, Saudi Arabia",
+    "country": "SA",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "me-west1",
+    "location": "Tel Aviv, Israel",
+    "country": "IL",
+    "source_url": "https://cloud.google.com/vertex-ai/docs/general/locations"
+   },
+   {
+    "code": "global",
+    "location": "Global endpoint (any Google location)",
+    "country": null,
+    "source_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations"
+   },
+   {
+    "code": "us",
+    "location": "Multi-region: United States",
+    "country": null,
+    "source_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations"
+   },
+   {
+    "code": "eu",
+    "location": "Multi-region: European Union",
+    "country": null,
+    "source_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations"
+   }
+  ]
+ }
+}

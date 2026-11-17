@@ -1,0 +1,11 @@
+LightCast
+Copyright 2026 Auspere
+
+This product includes IP geolocation data created by DB-IP, available from https://db-ip.com
+("IP Geolocation by DB-IP"): DB-IP Lite Country and ASN databases, licensed under the Creative
+Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/).
+The release embedded in a build is recorded in catalog/geo/MANIFEST.json. The data is
+redistributed unmodified.
+
+Catalog fingerprints in catalog/vendor/fingerprints.generated.json are identifiers and hashes taken
+from public repositories; each row records its source repository and that repository's license.

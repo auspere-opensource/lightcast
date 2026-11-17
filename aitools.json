@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Apify MCP Server",
+    "description": "MCP server for Apify Actors",
+    "tags": ["mcp-server"],
+    "endpoint_url": "https://github.com/apify/apify-mcp-server"
+  },
+  {
+    "name": "DBHub",
+    "description": "Database MCP server",
+    "tags": ["mcp-server"],
+    "endpoint_url": "https://github.com/bytebase/dbhub"
+  },
+  {
+    "name": "Windows MCP",
+    "description": "Windows automation MCP server",
+    "tags": ["mcp-server"],
+    "endpoint_url": "https://github.com/CursorTouch/Windows-MCP"
+  },
+  {
+    "name": "Playwright Skill",
+    "description": "Browser automation skill for Claude",
+    "tags": ["claude-skill"],
+    "endpoint_url": "https://github.com/lackeyjb/playwright-skill"
+  },
+  {
+    "name": "POML",
+    "description": "Prompt orchestration markup language for AI applications",
+    "tags": ["vscode-extension"],
+    "endpoint_url": "https://github.com/microsoft/poml"
+  },
+  {
+    "name": "Prompt Master",
+    "description": "Prompt engineering skill for Claude",
+    "tags": ["claude-skill"],
+    "endpoint_url": "https://github.com/nidhinjs/prompt-master"
+  },
+  {
+    "name": "Claude Octopus",
+    "description": "Claude Code plugin",
+    "tags": ["claude-code-plugin"],
+    "endpoint_url": "https://github.com/nyldn/claude-octopus"
+  },
+  {
+    "name": "MCPO",
+    "description": "MCP-to-OpenAPI proxy",
+    "tags": ["mcp-server"],
+    "endpoint_url": "https://github.com/open-webui/mcpo"
+  },
+  {
+    "name": "mcporter",
+    "description": "MCP client and command-line tool",
+    "tags": ["mcp-client"],
+    "endpoint_url": "https://github.com/openclaw/mcporter"
+  },
+  {
+    "name": "MCP Atlassian",
+    "description": "Atlassian MCP server",
+    "tags": ["mcp-server"],
+    "endpoint_url": "https://github.com/sooperset/mcp-atlassian"
+  }
+]

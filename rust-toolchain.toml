@@ -1,0 +1,5 @@
+# Pinned so every release platform builds with the same compiler.
+[toolchain]
+channel = "1.99.1"
+profile = "minimal"
+components = ["clippy", "rustfmt"]

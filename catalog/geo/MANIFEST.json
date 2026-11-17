@@ -1,0 +1,12 @@
+{
+  "source": "https://db-ip.com/db/lite.php",
+  "release": "2026-11",
+  "license": "CC-BY-4.0",
+  "attribution": "IP Geolocation by DB-IP",
+  "attribution_url": "https://db-ip.com",
+  "fetched_at": "2026-11-08T18:52:57Z",
+  "files": {
+    "dbip-country-lite.mmdb": {"sha256": "145ce5dfb812d8de28547e6289bb5c5f8b3df2f1dea21d324d5b575e0431311f", "bytes": 8515063},
+    "dbip-asn-lite.mmdb": {"sha256": "81565a450281c949fc83745f5ec9cfea70b035163b1152b055645884765d153d", "bytes": 9648279}
+  }
+}

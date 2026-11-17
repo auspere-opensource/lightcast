@@ -1,0 +1,233 @@
+# Where each collector looks, per OS.
+#
+# Tokens:  {home}   the user's home directory
+#          {config} linux: {home}/.config   macos: {home}/Library/Application Support   windows: {home}/AppData/Roaming
+#          {local}  linux: {home}/.config   macos: {home}/Library/Application Support   windows: {home}/AppData/Local
+#
+# status follows the rule-pack vocabulary: verified | observed_unclassified | not_observed | unverified | fixture_only.
+# "measured_present" means the file was seen on a real machine but its contents for this purpose were not yet confirmed.
+schema_version: 1
+
+browsers:
+  chromium:
+    - {browser: chrome,   os: linux,   root: "{config}/google-chrome"}
+    - {browser: edge,     os: linux,   root: "{config}/microsoft-edge"}
+    - {browser: brave,    os: linux,   root: "{config}/BraveSoftware/Brave-Browser"}
+    - {browser: chromium, os: linux,   root: "{config}/chromium"}
+    - {browser: vivaldi,  os: linux,   root: "{config}/vivaldi"}
+    - {browser: opera,    os: linux,   root: "{config}/opera"}
+    - {browser: chrome,   os: macos,   root: "{config}/Google/Chrome"}
+    - {browser: edge,     os: macos,   root: "{config}/Microsoft Edge"}
+    - {browser: brave,    os: macos,   root: "{config}/BraveSoftware/Brave-Browser"}
+    - {browser: chromium, os: macos,   root: "{config}/Chromium"}
+    - {browser: vivaldi,  os: macos,   root: "{config}/Vivaldi"}
+    - {browser: arc,      os: macos,   root: "{config}/Arc/User Data"}
+    - {browser: opera,    os: macos,   root: "{config}/com.operasoftware.Opera"}
+    - {browser: chrome,   os: windows, root: "{local}/Google/Chrome/User Data"}
+    - {browser: edge,     os: windows, root: "{local}/Microsoft/Edge/User Data"}
+    - {browser: brave,    os: windows, root: "{local}/BraveSoftware/Brave-Browser/User Data"}
+    - {browser: chromium, os: windows, root: "{local}/Chromium/User Data"}
+    - {browser: vivaldi,  os: windows, root: "{local}/Vivaldi/User Data"}
+    - {browser: opera,    os: windows, root: "{config}/Opera Software/Opera Stable"}
+  firefox:
+    - {os: linux,   root: "{home}/.mozilla/firefox"}
+    - {os: linux,   root: "{home}/snap/firefox/common/.mozilla/firefox"}
+    - {os: macos,   root: "{config}/Firefox/Profiles"}
+    - {os: windows, root: "{config}/Mozilla/Firefox/Profiles"}
+
+# format: mcp_servers (top-level "mcpServers"), claude_json ("mcpServers" + "projects.*.mcpServers"),
+#         vscode ("servers"), codex_toml ([mcp_servers.<name>] tables)
+mcp_configs:
+  - {client: claude_code,    scope: user,    os: all,     path: "{home}/.claude.json",   format: claude_json, status: measured_present}
+  - {client: claude_code,    scope: project, os: all,     path: "{project}/.mcp.json",   format: mcp_servers, status: unverified}
+  - {client: claude_desktop, scope: user,    os: all,     path: "{config}/Claude/claude_desktop_config.json", format: mcp_servers, status: unverified}
+  - {client: cursor,         scope: user,    os: all,     path: "{home}/.cursor/mcp.json", format: mcp_servers, status: unverified}
+  - {client: cursor,         scope: project, os: all,     path: "{project}/.cursor/mcp.json", format: mcp_servers, status: unverified}
+  - {client: windsurf,       scope: user,    os: all,     path: "{home}/.codeium/windsurf/mcp_config.json", format: mcp_servers, status: unverified}
+  - {client: vscode,         scope: user,    os: all,     path: "{config}/Code/User/mcp.json", format: vscode, status: unverified}
+  - {client: vscode,         scope: project, os: all,     path: "{project}/.vscode/mcp.json", format: vscode, status: unverified}
+  - {client: gemini_cli,     scope: user,    os: all,     path: "{home}/.gemini/settings.json", format: mcp_servers, status: unverified}
+  - {client: gemini_cli,     scope: project, os: all,     path: "{project}/.gemini/settings.json", format: mcp_servers, status: unverified}
+  - {client: codex_cli,      scope: user,    os: all,     path: "{home}/.codex/config.toml", format: codex_toml, status: measured_present}
+  - {client: copilot_cli,    scope: user,    os: all,     path: "{home}/.copilot/mcp-config.json", format: mcp_servers, status: unverified}
+  - {client: copilot_cli,    scope: project, os: all,     path: "{project}/.github/mcp.json", format: mcp_servers, status: unverified}
+  - {client: copilot_cli,    scope: project, os: all,     path: "{project}/.mcp.json", format: mcp_servers, status: unverified}
+  - {client: gemini_cli,     scope: user,    os: all,     path: "{home}/.gemini/extensions/*/gemini-extension.json", format: mcp_servers, status: unverified}
+  - {client: vscode_insiders, scope: user,   os: all,     path: "{config}/Code - Insiders/User/mcp.json", format: vscode, status: unverified}
+  - {client: vscodium,       scope: user,    os: all,     path: "{config}/VSCodium/User/mcp.json", format: vscode, status: unverified}
+
+skill_dirs:
+  - {client: claude_code, scope: user,    path: "{home}/.claude/skills", status: measured_present}
+  - {client: claude_code, scope: project, path: "{project}/.claude/skills", status: unverified}
+  - {client: agents,      scope: user,    path: "{home}/.agents/skills", status: unverified}
+  - {client: agents,      scope: project, path: "{project}/.agents/skills", status: unverified}
+  - {client: github_copilot, scope: user,    path: "{home}/.copilot/skills", status: unverified}
+  - {client: github_copilot, scope: project, path: "{project}/.github/skills", status: unverified}
+  - {client: opencode,       scope: user,    path: "{home}/.config/opencode/skills", status: unverified}
+  - {client: opencode,       scope: project, path: "{project}/.opencode/skills", status: unverified}
+  - {client: cursor,         scope: user,    path: "{home}/.cursor/skills", status: unverified}
+  - {client: cursor,         scope: project, path: "{project}/.cursor/skills", status: unverified}
+
+plugin_dirs:
+  - {client: claude_code, path: "{home}/.claude/plugins", status: measured_present}
+
+ide_extension_dirs:
+  - {ide: vscode,        path: "{home}/.vscode/extensions", status: measured_present}  # macOS 14.5 arm64, 2026-11-08
+  - {ide: vscode_server, path: "{home}/.vscode-server/extensions", status: measured_present}
+  - {ide: vscode_insiders, path: "{home}/.vscode-insiders/extensions", status: unverified}
+  - {ide: vscode_server_insiders, path: "{home}/.vscode-server-insiders/extensions", status: unverified}
+  - {ide: vscodium,      path: "{home}/.vscode-oss/extensions", status: unverified}
+  - {ide: code_server,   path: "{home}/.local/share/code-server/extensions", status: unverified}
+  - {ide: openvscode_server, path: "{home}/.openvscode-server/extensions", status: unverified}
+  - {ide: cursor,        path: "{home}/.cursor/extensions", status: unverified}
+  - {ide: cursor_server, path: "{home}/.cursor-server/extensions", status: unverified}
+  - {ide: windsurf,      path: "{home}/.windsurf/extensions", status: unverified}
+  - {ide: windsurf_server, path: "{home}/.windsurf-server/extensions", status: unverified}
+
+package_dirs:
+  - {kind: npm,  path: "{home}/.npm-global/lib/node_modules", status: unverified}
+  - {kind: npm,  path: "{home}/.nvm/versions/node/*/lib/node_modules", status: unverified}
+  - {kind: npm,  os: linux, path: "/usr/local/lib/node_modules", status: unverified}
+  - {kind: npm,  os: linux, path: "/usr/lib/node_modules", status: unverified}
+  - {kind: npm,  os: macos, path: "/opt/homebrew/lib/node_modules", status: unverified}
+  - {kind: npm,  path: "{config}/npm/node_modules", status: unverified}
+  - {kind: npm,  path: "{home}/.config/yarn/global/node_modules", status: unverified}
+  - {kind: npm,  path: "{home}/.local/share/pnpm/global/*/node_modules", status: unverified}
+  - {kind: npm,  path: "{local}/pnpm/global/*/node_modules", status: unverified}
+  - {kind: npm,  path: "{home}/.bun/install/global/node_modules", status: unverified}
+  - {kind: npm,  path: "{home}/.volta/tools/image/packages/*/lib/node_modules", status: unverified}
+  - {kind: pypi, path: "{home}/.local/share/pipx/venvs", status: unverified}
+  - {kind: pypi, path: "{home}/.local/pipx/venvs", status: unverified}
+  - {kind: pypi, path: "{home}/.local/share/uv/tools", status: unverified}
+  - {kind: pypi, path: "{home}/.local/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: macos, path: "{home}/Library/Python/*/lib/python/site-packages", status: unverified}
+  - {kind: pypi, os: windows, path: "{config}/Python/Python*/site-packages", status: unverified}
+  - {kind: pypi, os: windows, path: "{local}/Programs/Python/Python*/Lib/site-packages", status: unverified}
+  - {kind: pypi, os: linux, path: "/usr/local/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: linux, path: "/usr/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: macos, path: "/opt/homebrew/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: macos, path: "/Library/Frameworks/Python.framework/Versions/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: windows, path: "C:/Python*/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/.virtualenvs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/.cache/pypoetry/virtualenvs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: macos, path: "{home}/Library/Caches/pypoetry/virtualenvs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, os: windows, path: "{local}/pypoetry/Cache/virtualenvs/*/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/.pyenv/versions/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/.conda/envs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/.conda/envs/*/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/miniconda3/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/miniconda3/envs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/miniconda3/envs/*/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/anaconda3/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/anaconda3/envs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/anaconda3/envs/*/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/miniforge3/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/miniforge3/envs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/mambaforge/envs/*/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{project}/.venv/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{project}/.venv/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{project}/venv/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{project}/venv/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{project}/env/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{project}/env/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/*/.venv/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/*/.venv/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/*/venv/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/*/venv/Lib/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/*/env/lib/python*/site-packages", status: unverified}
+  - {kind: pypi, path: "{home}/*/env/Lib/site-packages", status: unverified}
+
+# Files read line by line for "export NAME=" / "NAME=" assignments. Only the NAME is kept.
+key_files:
+  - "{home}/.bashrc"
+  - "{home}/.bash_profile"
+  - "{home}/.profile"
+  - "{home}/.zshrc"
+  - "{home}/.zprofile"
+  - "{home}/.zshenv"
+  - "{home}/.config/fish/config.fish"
+  - "{home}/.env"
+  - "{project}/.env"
+  - "{project}/.env.local"
+
+agent_settings:
+  - {agent: claude_code, path: "{home}/.claude/settings.json", format: claude_settings, status: measured_present}
+  - {agent: claude_code, path: "{project}/.claude/settings.json", format: claude_settings, status: unverified}
+  - {agent: claude_code, path: "{project}/.claude/settings.local.json", format: claude_settings, status: unverified}
+  - {agent: codex_cli,   path: "{home}/.codex/config.toml", format: codex_toml, status: measured_present}
+
+# Files that provide durable AI configuration, instructions, rules or memory. The collector records
+# only file names and paths; it never opens their contents. Broad recursive home scans are
+# deliberately excluded. Project rows apply only to explicit --project directories.
+agent_files:
+  - {tool: Codex, scope: user, kind: instructions, os: all, path: "{home}/.codex/AGENTS.md", status: unverified}
+  - {tool: Claude Code, scope: user, kind: memory, os: all, path: "{home}/.claude/CLAUDE.md", status: unverified}
+  - {tool: Claude Code, scope: user, kind: rules, os: all, path: "{home}/.claude/rules/*.md", status: unverified}
+  - {tool: Gemini CLI, scope: user, kind: memory, os: all, path: "{home}/.gemini/GEMINI.md", status: unverified}
+  - {tool: Gemini CLI, scope: system, kind: configuration, os: linux, path: "/etc/gemini-cli/system-defaults.json", status: unverified}
+  - {tool: Gemini CLI, scope: system, kind: configuration, os: linux, path: "/etc/gemini-cli/settings.json", status: unverified}
+  - {tool: Gemini CLI, scope: system, kind: configuration, os: macos, path: "/Library/Application Support/GeminiCli/system-defaults.json", status: unverified}
+  - {tool: Gemini CLI, scope: system, kind: configuration, os: macos, path: "/Library/Application Support/GeminiCli/settings.json", status: unverified}
+  - {tool: Gemini CLI, scope: system, kind: configuration, os: windows, path: "C:/ProgramData/gemini-cli/system-defaults.json", status: unverified}
+  - {tool: Gemini CLI, scope: system, kind: configuration, os: windows, path: "C:/ProgramData/gemini-cli/settings.json", status: unverified}
+  - {tool: GitHub Copilot CLI, scope: user, kind: configuration, os: all, path: "{home}/.copilot/config.json", status: unverified}
+  - {tool: GitHub Copilot CLI, scope: user, kind: instructions, os: all, path: "{home}/.copilot/copilot-instructions.md", status: unverified}
+  - {tool: GitHub Copilot CLI, scope: user, kind: instructions, os: all, path: "{home}/.copilot/instructions/*.instructions.md", status: unverified}
+  - {tool: OpenCode, scope: user, kind: configuration, os: all, path: "{home}/.config/opencode/opencode.json", status: unverified}
+  - {tool: OpenCode, scope: user, kind: configuration, os: all, path: "{home}/.config/opencode/opencode.jsonc", status: unverified}
+  - {tool: OpenCode, scope: user, kind: instructions, os: all, path: "{home}/.config/opencode/AGENTS.md", status: unverified}
+  - {tool: Continue, scope: user, kind: configuration, os: all, path: "{home}/.continue/config.yaml", status: unverified}
+  - {tool: Continue, scope: user, kind: configuration, os: all, path: "{home}/.continue/config.json", status: unverified}
+  - {tool: Continue, scope: user, kind: rules, os: all, path: "{home}/.continue/rules/*.md", status: unverified}
+  - {tool: Aider, scope: user, kind: configuration, os: all, path: "{home}/.aider.conf.yml", status: unverified}
+  - {tool: Qwen Code, scope: user, kind: configuration, os: all, path: "{home}/.qwen/settings.json", status: unverified}
+  - {tool: Qwen Code, scope: user, kind: memory, os: all, path: "{home}/.qwen/QWEN.md", status: unverified}
+  - {tool: Codex + Cursor + Copilot + OpenCode, scope: project, kind: instructions, os: all, path: "{project}/AGENTS.md", status: unverified}
+  - {tool: Claude Code + Cursor + Copilot, scope: project, kind: memory, os: all, path: "{project}/CLAUDE.md", status: unverified}
+  - {tool: Claude Code, scope: project, kind: memory, os: all, path: "{project}/.claude/CLAUDE.md", status: unverified}
+  - {tool: Claude Code + Copilot, scope: project, kind: rules, os: all, path: "{project}/.claude/rules/*.md", status: unverified}
+  - {tool: Gemini CLI + Copilot, scope: project, kind: memory, os: all, path: "{project}/GEMINI.md", status: unverified}
+  - {tool: Gemini CLI, scope: project, kind: memory, os: all, path: "{project}/.gemini/GEMINI.md", status: unverified}
+  - {tool: Cursor, scope: project, kind: rules, os: all, path: "{project}/.cursor/rules/*.mdc", status: unverified}
+  - {tool: Cursor, scope: project, kind: rules, os: all, path: "{project}/.cursorrules", status: unverified}
+  - {tool: GitHub Copilot, scope: project, kind: instructions, os: all, path: "{project}/.github/copilot-instructions.md", status: unverified}
+  - {tool: GitHub Copilot, scope: project, kind: instructions, os: all, path: "{project}/.github/instructions/*.instructions.md", status: unverified}
+  - {tool: OpenCode, scope: project, kind: configuration, os: all, path: "{project}/opencode.json", status: unverified}
+  - {tool: OpenCode, scope: project, kind: configuration, os: all, path: "{project}/opencode.jsonc", status: unverified}
+  - {tool: Continue, scope: project, kind: rules, os: all, path: "{project}/.continue/rules/*.md", status: unverified}
+  - {tool: Windsurf, scope: project, kind: rules, os: all, path: "{project}/.windsurf/rules/*.md", status: unverified}
+  - {tool: Windsurf, scope: project, kind: rules, os: all, path: "{project}/.windsurfrules", status: unverified}
+  - {tool: Cline, scope: project, kind: rules, os: all, path: "{project}/.clinerules", status: unverified}
+  - {tool: Cline, scope: project, kind: rules, os: all, path: "{project}/.clinerules/*.md", status: unverified}
+  - {tool: Roo Code, scope: project, kind: rules, os: all, path: "{project}/.roo/rules/*.md", status: unverified}
+  - {tool: Aider, scope: project, kind: configuration, os: all, path: "{project}/.aider.conf.yml", status: unverified}
+  - {tool: Qwen Code, scope: project, kind: memory, os: all, path: "{project}/QWEN.md", status: unverified}
+  - {tool: Qwen Code, scope: project, kind: configuration, os: all, path: "{project}/.qwen/settings.json", status: unverified}
+
+# Where launched MCP packages are installed, for upstream tracing (dependency names and provider
+# hostnames in the package's own code). layout: npx = <dir>/package.json names the launched package and
+# <dir>/node_modules holds its tree; node_modules = a global node_modules dir; site_packages_root = a
+# venv-like dir containing lib/python*/site-packages or Lib/site-packages.
+package_roots:
+  - {kind: npm,  layout: npx,                os: all,     path: "{home}/.npm/_npx/*", status: measured_present}
+  - {kind: npm,  layout: npx,                os: windows, path: "{local}/npm-cache/_npx/*", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "{home}/.npm-global/lib/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "/usr/local/lib/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "/usr/lib/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: macos,   path: "/opt/homebrew/lib/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "{home}/.nvm/versions/node/*/lib/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "{home}/.config/yarn/global/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "{home}/.local/share/pnpm/global/*/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "{home}/.bun/install/global/node_modules", status: unverified}
+  - {kind: npm,  layout: node_modules,       os: all,     path: "{home}/.volta/tools/image/packages/*/lib/node_modules", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: linux,   path: "{home}/.cache/uv/archive-v0/*", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: macos,   path: "{home}/.cache/uv/archive-v0/*", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: windows, path: "{local}/uv/cache/archive-v0/*", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{home}/.local/share/pipx/venvs/*", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{home}/.local/share/uv/tools/*", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{project}/.venv", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{project}/venv", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{project}/env", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{home}/*/.venv", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{home}/*/venv", status: unverified}
+  - {kind: pypi, layout: site_packages_root, os: all,     path: "{home}/*/env", status: unverified}

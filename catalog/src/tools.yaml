@@ -1,0 +1,98 @@
+# Hand-authored catalog rows. Every row carries a status; nothing here has been promoted to
+# verified yet except where an observation is cited.
+schema_version: 1
+
+# Well-known AI command-line tools. A bare executable name on PATH is a name-only match, so the
+# harvested cli_command rows are downgraded to low; these curated rows stay medium.
+ai_cli:
+  - {command: claude,       provider: Anthropic, tool: Claude Code,       agent: true,  status: unverified}
+  - {command: codex,        provider: OpenAI,    tool: Codex CLI,         agent: true,  status: unverified}
+  - {command: gemini,       provider: Google,    tool: Gemini CLI,        agent: true,  status: unverified}
+  - {command: copilot,      provider: GitHub,    tool: Copilot CLI,       agent: true,  status: unverified}
+  - {command: cursor-agent, provider: Cursor,    tool: Cursor Agent CLI,  agent: true,  status: unverified}
+  - {command: aider,        provider: Aider,     tool: Aider,             agent: true,  status: unverified}
+  - {command: goose,        provider: Block,     tool: Goose,             agent: true,  status: unverified}
+  - {command: opencode,     provider: SST,       tool: OpenCode,          agent: true,  status: unverified}
+  - {command: amp,          provider: Sourcegraph, tool: Amp,             agent: true,  status: unverified}
+  - {command: qwen,         provider: Alibaba,   tool: Qwen Code,         agent: true,  status: unverified}
+  - {command: crush,        provider: Charm,     tool: Crush,             agent: true,  status: unverified}
+  - {command: ollama,       provider: Ollama,    tool: Ollama,            agent: false, status: unverified}
+  - {command: lms,          provider: LM Studio, tool: LM Studio CLI,     agent: false, status: unverified}
+  - {command: llm,          provider: Simon Willison, tool: llm,          agent: false, status: unverified}
+
+# VS Code-family extension ids (publisher.name, lowercase). "publisher.*" matches any extension of that publisher.
+ide_extensions:
+  - {id: "anthropic.*",                        provider: Anthropic, tool: Claude extension,  status: measured_present, upstream: anthropic}
+  - {id: "openai.*",                           provider: OpenAI,    tool: OpenAI extension,  status: measured_present, upstream: openai}
+  - {id: github.copilot,                       provider: GitHub,    tool: GitHub Copilot,    status: unverified, upstream: github_copilot}
+  - {id: github.copilot-chat,                  provider: GitHub,    tool: GitHub Copilot Chat, status: unverified, upstream: github_copilot}
+  - {id: continue.continue,                    provider: Continue,  tool: Continue,          status: unverified}
+  - {id: saoudrizwan.claude-dev,               provider: Cline,     tool: Cline,             status: unverified}
+  - {id: rooveterinaryinc.roo-cline,           provider: Roo Code,  tool: Roo Code,          status: unverified}
+  - {id: kilocode.kilo-code,                   provider: Kilo Code, tool: Kilo Code,         status: unverified}
+  - {id: codeium.codeium,                      provider: Windsurf,  tool: Codeium,           status: unverified}
+  - {id: google.geminicodeassist,              provider: Google,    tool: Gemini Code Assist, status: unverified, upstream: google}
+  - {id: amazonwebservices.amazon-q-vscode,    provider: AWS,       tool: Amazon Q,          status: unverified}
+  - {id: tabnine.tabnine-vscode,               provider: Tabnine,   tool: Tabnine,           status: unverified}
+  - {id: sourcegraph.cody-ai,                  provider: Sourcegraph, tool: Cody,            status: unverified}
+  - {id: supermaven.supermaven,                provider: Supermaven, tool: Supermaven,       status: unverified}
+
+# AI provider key NAMES. Only the presence of the name is reported, never the value.
+key_names:
+  - {name: OPENAI_API_KEY,               provider: OpenAI}
+  - {name: AZURE_OPENAI_API_KEY,         provider: Microsoft}
+  - {name: ANTHROPIC_API_KEY,            provider: Anthropic}
+  - {name: CLAUDE_CODE_OAUTH_TOKEN,      provider: Anthropic}
+  - {name: GEMINI_API_KEY,               provider: Google}
+  - {name: GOOGLE_GENERATIVE_AI_API_KEY, provider: Google}
+  - {name: MISTRAL_API_KEY,              provider: Mistral AI}
+  - {name: GROQ_API_KEY,                 provider: Groq}
+  - {name: DEEPSEEK_API_KEY,             provider: DeepSeek}
+  - {name: XAI_API_KEY,                  provider: xAI}
+  - {name: PERPLEXITY_API_KEY,           provider: Perplexity}
+  - {name: OPENROUTER_API_KEY,           provider: OpenRouter}
+  - {name: COHERE_API_KEY,               provider: Cohere}
+  - {name: TOGETHER_API_KEY,             provider: Together AI}
+  - {name: FIREWORKS_API_KEY,            provider: Fireworks AI}
+  - {name: HF_TOKEN,                     provider: Hugging Face}
+  - {name: HUGGINGFACE_API_KEY,          provider: Hugging Face}
+  - {name: REPLICATE_API_TOKEN,          provider: Replicate}
+  - {name: ELEVENLABS_API_KEY,           provider: ElevenLabs}
+  - {name: VOYAGE_API_KEY,               provider: Voyage AI}
+
+# Capability hints for well-known MCP server packages (catalog rows, so they may assign a class).
+# upstreams: provider ids (catalog/src/providers.yaml) the package is known to call.
+mcp_packages:
+  - {package: "@modelcontextprotocol/server-filesystem", capabilities: [fs_write], status: unverified}
+  - {package: "@modelcontextprotocol/server-everything",  capabilities: [],         status: unverified}
+  - {package: "@modelcontextprotocol/server-puppeteer",   capabilities: [network_egress], status: unverified}
+  - {package: "@playwright/mcp",                          capabilities: [network_egress], status: unverified}
+  - {package: "chrome-devtools-mcp",                      capabilities: [network_egress], status: unverified}
+  - {package: "@wonderwhy-er/desktop-commander",          capabilities: [shell_exec, fs_write], status: unverified}
+  - {package: "mcp-server-fetch",                         capabilities: [network_egress], status: unverified}
+  - {package: "mcp-server-git",                           capabilities: [fs_write], status: unverified}
+  - {package: "elevenlabs-mcp",                           capabilities: [network_egress], upstreams: [elevenlabs], status: unverified}
+
+# Remote MCP hosts operated by the named vendor. A remote server whose host is not here (and not a
+# catalogued provider host) is classed remote_unknown.
+mcp_remote_hosts:
+  - {host: mcp.notion.com,        provider: Notion,    hq_country: US, status: unverified}
+  - {host: mcp.linear.app,        provider: Linear,    hq_country: US, status: unverified}
+  - {host: mcp.atlassian.com,     provider: Atlassian, hq_country: AU, status: unverified}
+  - {host: mcp.sentry.dev,        provider: Sentry,    hq_country: US, status: unverified}
+  - {host: mcp.stripe.com,        provider: Stripe,    hq_country: US, status: unverified}
+  - {host: api.githubcopilot.com, provider: GitHub,    hq_country: US, status: unverified}
+
+# Commands that are a shell; an MCP server launched as one of these can run arbitrary commands.
+shell_commands: [bash, sh, zsh, fish, dash, ksh, pwsh, powershell, cmd]
+
+# Env-var or header NAMES that carry credentials into a server (matched case-insensitively).
+credential_name_patterns:
+  - "(^|_)(TOKEN|SECRET|PASSWORD|PASSWD|PAT)$"
+  - "API_?KEY$"
+  - "ACCESS_?KEY(_ID)?$"
+  - "PRIVATE_?KEY$"
+  - "CREDENTIALS?$"
+  - "^AUTHORIZATION$"
+  - "^(AWS|GITHUB|GH|GITLAB|AZURE|GOOGLE|GCP|SLACK|STRIPE|DATABASE)_"
+  - "_(DSN|CONNECTION_STRING|DATABASE_URL)$"

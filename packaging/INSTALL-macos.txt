@@ -1,0 +1,85 @@
+lightcast @VERSION@ for macOS (Apple Silicon and Intel) - how to install and run
+========================================================================
+
+This build is NOT signed with an Apple Developer ID and NOT notarized.
+macOS Gatekeeper blocks such programs when they were downloaded from
+the internet, so follow these steps in order. lightcast is one
+"universal" file that runs on both Apple Silicon and Intel Macs. It does
+not need administrator rights (no sudo).
+
+You need: lightcast-@VERSION@-universal-apple-darwin.tar.gz and
+SHA256SUMS, from the same release folder. Use the Terminal app.
+
+
+1. Check the download is intact
+------------------------------------------------------------------------
+In Terminal, in the folder that holds the download (e.g. cd ~/Downloads):
+
+    shasum -a 256 lightcast-@VERSION@-universal-apple-darwin.tar.gz
+
+Compare the result with the line for the same file name in SHA256SUMS.
+If they differ, delete the download and get it again. Do not run it.
+
+
+2. Unpack
+------------------------------------------------------------------------
+    tar -xzf lightcast-@VERSION@-universal-apple-darwin.tar.gz
+    cd lightcast-@VERSION@-universal-apple-darwin
+
+
+3. Remove the "downloaded from the internet" mark
+------------------------------------------------------------------------
+    xattr -d com.apple.quarantine lightcast
+
+"No such xattr" just means the mark was not there; carry on. This tells
+macOS you have chosen to trust this one file. Only do it after step 1
+matched.
+
+
+4. Run it
+------------------------------------------------------------------------
+    ./lightcast
+
+Useful options:
+
+    ./lightcast --html report.html     self-contained HTML report
+    ./lightcast --json report.json     full report as JSON
+    ./lightcast --verbose              every finding with evidence
+    ./lightcast --help                 all options
+
+Optional, to run it from anywhere:
+
+    mkdir -p ~/.local/bin && mv lightcast ~/.local/bin/
+    (then add ~/.local/bin to your PATH if it is not already there)
+
+
+If macOS still stops it
+------------------------------------------------------------------------
+"lightcast cannot be opened because Apple cannot check it for
+malicious software" or "Apple could not verify lightcast is free of
+malware":
+    You skipped step 3, or ran a copy that still carries the mark.
+    Either run step 3, or: open System Settings > Privacy & Security,
+    scroll down to the message about lightcast, click "Open Anyway",
+    enter your password, then run ./lightcast again and choose
+    "Open".
+
+"permission denied" when running ./lightcast:
+    chmod +x lightcast
+
+macOS asks whether Terminal may access a folder (Documents, Desktop,
+Downloads):
+    This happens only with --project pointing into those folders.
+    Allow it to include that project, or decline and the scan skips it.
+
+
+About the report
+------------------------------------------------------------------------
+- It runs locally and sends nothing anywhere (see PRIVACY.md). The only
+  exception is --resolve, which you must ask for.
+- Exit code 1 means a finding at or above --fail-on (default: critical)
+  was found. It is not a crash.
+
+Signature files (*.sigstore.json) in this release are made with a test
+key: they prove the release pipeline works, not who published it. See
+TEST-SIGNED-READ-ME.txt if present.
